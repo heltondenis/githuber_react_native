@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Keyboard } from 'react-native';
 import { Container, Form, Input, SubmitButton,
-   List, User, Avatar, Name, Bio, ProfileButton, ProfileButtonText  } from './styles';
+   List, User, Avatar, Name, Bio, ProfileButton, ProfileButtonText, Button  } from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 
