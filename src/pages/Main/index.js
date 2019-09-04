@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import { Keyboard, ActivityIndicator } from 'react-native';
 import { Container, Form, Input, SubmitButton,
    List, User, Avatar, Name, Bio, ProfileButton, ProfileButtonText, Button, Text } from './styles';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
+
 
 export default class Main extends Component {
 
@@ -12,6 +14,24 @@ export default class Main extends Component {
     users: [],
     loading: false,
   };
+
+  componentDidMount() {
+    (async () => {
+      const users = await AsyncStorage.getItem('users');
+      if(users) {
+        this.setState({ users: JSON.parse(users) });
+      }
+    })()
+
+  }
+
+  componentDidUpdate(_, prevState) {
+     const { users } = this.state;
+
+     if(prevState.users !== users) {
+      AsyncStorage.setItem('users', JSON.stringify(users));
+     }
+  }
 
   handleAddUser = async () => {
     const { users, newUser } = this.state;
@@ -68,7 +88,6 @@ export default class Main extends Component {
             <Avatar source={{ uri: item.avatar }} />
             <Name>{item.name}</Name>
             <Bio>{item.bio}</Bio>
-            <Text>{item.id}</Text>
             <ProfileButton onPress={() => {}}>
               <ProfileButtonText>Ver perfil</ProfileButtonText>
             </ProfileButton>

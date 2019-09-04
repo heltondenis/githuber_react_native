@@ -87,9 +87,6 @@ export const ProfileButtonText = styled.Text`
   text-transform: uppercase;
 `;
 
-export const Text = styled.Text`
-
-`;
 
 
 
